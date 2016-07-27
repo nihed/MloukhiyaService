@@ -8,7 +8,7 @@ public class ModelInformation {
     private String id;
     private ModelType type;
     @JsonIgnore
-    private Object content;
+    private Object payload;
 
     public ModelInformation() {
     }
@@ -30,13 +30,13 @@ public class ModelInformation {
     }
 
     @JsonIgnore
-    public Object getContent() {
-        return content;
+    public Object getPayload() {
+        return payload;
     }
 
     @JsonIgnore
-    public void setContent(Object content) {
-        this.content = content;
+    public void setPayload(Object payload) {
+        this.payload = payload;
     }
 
     @Override
@@ -46,15 +46,17 @@ public class ModelInformation {
 
         ModelInformation that = (ModelInformation) o;
 
-        if (!id.equals(that.id)) return false;
-        return type == that.type;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (type != that.type) return false;
+        return payload != null ? payload.equals(that.payload) : that.payload == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + type.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (payload != null ? payload.hashCode() : 0);
         return result;
     }
 
@@ -63,7 +65,7 @@ public class ModelInformation {
         return "ModelInformation{" +
                 "id='" + id + '\'' +
                 ", type=" + type +
+                ", payload=" + payload +
                 '}';
     }
-
 }
