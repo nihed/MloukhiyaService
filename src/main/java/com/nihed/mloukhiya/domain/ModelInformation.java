@@ -1,10 +1,14 @@
 package com.nihed.mloukhiya.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ModelInformation {
 
     private String id;
-    private Type type;
+    private ModelType type;
+    @JsonIgnore
+    private Object content;
 
     public ModelInformation() {
     }
@@ -17,12 +21,22 @@ public class ModelInformation {
         this.id = id;
     }
 
-    public Type getType() {
+    public ModelType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(ModelType type) {
         this.type = type;
+    }
+
+    @JsonIgnore
+    public Object getContent() {
+        return content;
+    }
+
+    @JsonIgnore
+    public void setContent(Object content) {
+        this.content = content;
     }
 
     @Override
@@ -52,7 +66,4 @@ public class ModelInformation {
                 '}';
     }
 
-    private static enum Type {
-        LIST, MAP
-    }
 }
